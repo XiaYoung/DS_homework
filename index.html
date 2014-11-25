@@ -12,7 +12,7 @@
   		overflow:auto;
 
     }
-    p{
+    p {
     	margin: 5px;
   		padding: 0;	
     }
@@ -80,10 +80,12 @@
 		<p>排队信息</p>
 	</div>
 	<div id="addArea">
-		<div id="addDocArea"></div>
-		<div id="addPatArea"></div>
-		<button id="addDoctorBtn" onclick="addDoctor()">添加医生</button>
-		<p>病情等级: <input type="text" id="patientLevel" value="4" size="1"/> <button id="addPatientBtn" onclick="addPatient()">添加病人</button> </p>		
+		<div id="addDocArea"onclick="addDoctor()">添加医生</div>
+		<div id="addPatArea">
+			病情等级: 
+			<input type="text" id="patientLevel" value="4" size="1"/> 
+			<button id="addPatientBtn" onclick="addPatient()">添加病人</button> 
+		</div>
 	</div>
 	<div id="offices">
 		<p>诊室</p>	
@@ -92,61 +94,61 @@
 </div>
 
 <script language="JavaScript">
-    //Simple Linked Queue
-    var QNode = function(newObj){
-        this.obj = null;
-        this.next = null;
-        this.Init = function(newObj){
-            this.obj = newObj;
-        }
-        this.Init(newObj);
-    }
-    
-    var Queue = function(){
-        this.front = null;
-        this.rear = null;
-        this.size = 0;
-       
-        this.Enqueue = function(newObj){
-            this.size += 1;
-            var newQNode = new QNode(newObj);
-            if(this.rear == null){
-                this.front = newQNode;
-                this.rear = newQNode;
-            }else{
-                this.rear.next = newQNode;
-                this.rear = this.rear.next;
-            }
-        }
-        
-        this.Dequeue = function(){
-            if(this.size <= 0)
-                return null;
-            else if(this.size == 1){
-                this.size -= 1;
-                var deQNode = this.rear;
-                this.front = null;
-                this.rear = null;
-                return deQNode.obj;
-            }
-            else{
-                this.size -= 1;
-                var curQNode = this.front;
-                this.front = this.front.next;
-                return curQNode.obj;
-            }
-        }
-    }
-    
+	//Simple Linked Queue
+	var QNode = function(newObj){
+		this.obj = null;
+		this.next = null;
+		this.Init = function(newObj){
+		this.obj = newObj;
+		}
+		this.Init(newObj);
+	}
 
-    //定义doctor类
-    var Doctor = function(newName){
+	var Queue = function(){
+		this.front = null;
+		this.rear = null;
+		this.size = 0;
+
+		this.Enqueue = function(newObj){
+			this.size += 1;
+			var newQNode = new QNode(newObj);
+			if(this.rear == null){
+				this.front = newQNode;
+				this.rear = newQNode;
+			}else{
+				this.rear.next = newQNode;
+				this.rear = this.rear.next;
+			}
+		}
+	
+		this.Dequeue = function(){
+			if(this.size <= 0)
+				return null;
+			else if(this.size == 1){
+				this.size -= 1;
+				var deQNode = this.rear;
+				this.front = null;
+				this.rear = null;
+				return deQNode.obj;
+			}
+			else{
+				this.size -= 1;
+				var curQNode = this.front;
+				this.front = this.front.next;
+				return curQNode.obj;
+			}
+		}
+	}
+	
+
+	//定义doctor类
+	var Doctor = function(newName){
 		this.timer = null;
-        this.name = null;
-        
-        this.Init = function(newName){
-            this.name = newName;
-        }
+		this.name = null;
+	
+		this.Init = function(newName){
+			this.name = newName;
+		}
 		this.timedCount = function (field){
 			var time = document.getElementById(field).value;
 			var self = this;
@@ -164,24 +166,24 @@
 				document.getElementById(field).value = 0;
 				clearTimeout(this.timer);
 		}
-        this.Init(newName);
-    }
+		this.Init(newName);
+	}
 
-    //定义patient类
-    var Patient = function(newName,newLevel,newDuration){
-        //public members: default null
-        this.name = null;
+	//定义patient类
+	var Patient = function(newName,newLevel,newDuration){
+		//public members: default null
+		this.name = null;
 		this.level = null;
 		this.duration = null;
-        
-        //构造函数 intialize this.data
-        this.Init = function(newName,newLevel,newDuration){
-            this.name = newName;
+
+		//构造函数 intialize this.data
+		this.Init = function(newName,newLevel,newDuration){
+			this.name = newName;
 			this.level = newLevel;
-            this.duration = newDuration;
-        };
-        this.Init(newName,newLevel,newDuration);
-    }
+			this.duration = newDuration;
+		};
+		this.Init(newName,newLevel,newDuration);
+	}
 
 
 //===============程序==============
@@ -299,7 +301,7 @@
 			for(j = 0; j<patientQueueArray[i].size; j++){
 				//遍历队列
 				var patient = curQNode.obj;
-                curQNode = curQNode.next;
+				curQNode = curQNode.next;
 				
 				//创建<p>元素
 				var p = document.createElement("p"); 
@@ -309,13 +311,12 @@
 				p.appendChild(t);
 				//向div追加<p>元素
 				document.getElementById("notes").appendChild(p);
-      		}
+			}
 		}
 	}
 
 	//完毕 结束看病，并且医生进入空闲队列，叫号
  	function finish(doctor){
-
  		//医生入队，防止重复入队
  		if (document.getElementById(doctor.name+"countTime").value != -1) {
 	 		doctorQueue.Enqueue(doctor);
@@ -362,7 +363,6 @@
 		displayInfo();
 	}
 
-
 	//新医生加入
 	function addDoctor(){
 	    var doctor = new Doctor( "Doctor_" + doctorNum );
@@ -381,11 +381,6 @@
 		displayInfo();
 		setTimeout(function(){nextPatient();},1000); //延迟叫号
 	}
-
-//============运行
-
-
-
 
 </script>
 </body>
