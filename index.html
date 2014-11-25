@@ -39,7 +39,7 @@
 		float: left;
 	}
 	#addDocArea {
-		width: 60px;
+		width: 80px;
 		height: 60px;
 		float: left;
 		margin: 0px;
@@ -47,7 +47,7 @@
   		border-style: none; 		
 	}	
 	#addPatArea {
-		width: 340px;
+		width: 320px;
 		height: 60px;
 		float: left;
 		margin: 0px;
@@ -97,11 +97,11 @@
 		<p>排队信息</p>
 	</div>
 	<div id="addArea">
-		<div id="addDocArea"onclick="addDoctor()">添加医生</div>
+		<div id="addDocArea"><button id="addDoctorBtn" onclick="addDoctor()">添加医生</button></div>
 		<div id="addPatArea">
 			病情等级: 
 			<input type="text" id="patientLevel" value="4" size="1"/> 
-			<button id="addPatientBtn" onclick="addPatient()">添加病人</button> 
+			<button id="addPatientBtn" onclick="addPatient()">添加病人</button>		
 		</div>
 	</div>
 	<div id="offices">
