@@ -143,7 +143,7 @@
 				return null;
 			else if(this.size == 1){
 				this.size -= 1;
-				var deQNode = this.rear;
+				var deQNode = this.front;
 				this.front = null;
 				this.rear = null;
 				return deQNode.obj;
@@ -166,6 +166,7 @@
 		this.Init = function(newName){
 			this.name = newName;
 		}
+		//倒计时就诊时间，每1000毫秒，field中的数值减1
 		this.timedCount = function (field){
 			var time = document.getElementById(field).value;
 			var self = this;
@@ -178,10 +179,6 @@
 				finish(this);
 				setTimeout(function(){nextPatient();},1000);
 			}
-		}
-		this.stopCount = function(field){
-				document.getElementById(field).value = 0;
-				clearTimeout(this.timer);
 		}
 		this.Init(newName);
 	}
@@ -246,7 +243,7 @@
 		nextPatient();
 		c = c+1;
 		if(c < doctorNum){
-			t = setTimeout("start()",1000);
+			t = setTimeout("start()",2000);
 		}
 		else{
 			clearTimeout(t);
@@ -341,7 +338,7 @@
 	 		clearTimeout(doctor.timer);
 			document.getElementById(doctor.name+"countTime").value = -1; //-1表示已经在队列
 			document.getElementById(doctor.name).style.backgroundColor = "gray";
-			setTimeout(function(){nextPatient();},1000); //延迟叫号
+			setTimeout(function(){nextPatient();},2000); //延迟叫号
  		};
  	}
 
@@ -386,7 +383,6 @@
 	    doctorQueue.Enqueue(doctor);
 		doctorNum ++;
 		addRoom(doctor);
-		setTimeout(function(){nextPatient();},1000); //延迟叫号
 	}
 
 	//新病人排号
@@ -396,7 +392,7 @@
 		patientNum++;
 		patientQueueArray[patient.level].Enqueue(patient);
 		displayInfo();
-		setTimeout(function(){nextPatient();},1000); //延迟叫号
+		setTimeout(function(){nextPatient();},2000); //延迟叫号
 	}
 
 </script>
